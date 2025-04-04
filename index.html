@@ -4,69 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Touch grass!</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id="titulo-bienvenida">Por favor toca pasto</h1>
-    <p id="msj-bienvenida">Tu familia está suplicando, por favor sal de la casa :c</p>
-    <h2>Explora una de la siguientes opciones:</h2>
+    <header>
+        <h1 id="titulo-bienvenida">Por favor toca pasto</h1>
+        <p id="msj-bienvenida">Tu familia está suplicando, por favor sal de la casa :c</p>
+    </header>
 
-    <table id="option-buttons">
-        <tr>
-            <td><input type="button" value="Agregar actividad" id="add-act"></td>
-            <td><input type="button" value="Ver listado de actividades" id="see-act"></td>
-            <td><input type="button" value="Estadísticas" id="stats"></td>
-        </tr>
-    </table>
-    <h2>También puedes echar un vistazo a las últimas actividades registradas:</h2>
-    <table id="last5">
-        <tr>
-            <th>Inicio</th>
-            <th>Término</th>
-            <th>Comuna</th>
-            <th>Sector</th>
-            <th>Tema</th>
-            <th>Foto</th>
-        </tr>
-        <tr>
-            <td>2025-04-05 09:00</td>
-            <td>2025-04-05 19:00</td>
-            <td>Valdivia</td>
-            <td>Cementerio</td>
-            <td>Funeral del amigo I.L. (lo atraparon)</td>
-            <td><img src="images/vuela-alto.png" alt="tributo: roate el cielo, sweet prince" height="200px" width="130px"></td>
-        </tr>
-        <tr>
-            <td>2025-03-22 23:00</td>
-            <td>-</td>
-            <td>Valdivia</td>
-            <td>Casino Dreams</td>
-            <td>Ganar unas chauchas para comprarle casas a nuestras mamás!!!</td>
-            <td><img src="images/dreams-noche.JPG" alt="casino Dreams de Valdivia de noche" height="175px" width="130px"></td>
-        </tr>
-        <tr>
-            <td>2025-03-15 17:00</td>
-            <td>2025-03-15 18:00</td>
-            <td>Valdivia</td>
-            <td>Sgto. Aldea #69</td>
-            <td>Preparación ida al casino</td>
-            <td><img src="images/cheating-at-poker.jpg" alt="portada de libro sobre hacer trampa en el póker" height="130px" width="130px"></td>
-        </tr>
-        <tr>
-            <td>2025-02-19 10:00</td>
-            <td>2025-02-19 13:00</td>
-            <td>Valdivia</td>
-            <td>Sgto. Aldea #69</td>
-            <td>Aprender a jugar póker</td>
-            <td><img src="images/poker-dummies.jpg" alt="portada de libro sobre cómo jugar póker" height="164px" width="130px"></td>
-        </tr>
-        <tr>
-            <td>2025-01-02 12:30</td>
-            <td>2025-01-02 14:00</td>
-            <td>Santiago Centro</td>
-            <td>Club Hípico #1001</td>
-            <td>Celebrar el inicio de año viendo carreras de caballos por primera vez!!</td>
-            <td><img src="images/horse-race.jpg" alt="foto de caballos en carrera" height="130px" width="130px"></td>
-        </tr>
-    </table>
+    <section id="option-section">
+        <h2 class="center">Explora una de la siguientes opciones:</h2>
+        <div class="tb-center">
+            <table id="option-buttons">
+                <tr>
+                    <td><input type="button" value="Agregar actividad" id="add-act"></td>
+                    <td><input type="button" value="Ver listado de actividades" id="see-act"></td>
+                    <td><input type="button" value="Estadísticas" id="stats"></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    
+    <h2 class="center">También puedes echar un vistazo a las últimas actividades registradas:</h2>
+    <div class="tb-center">
+        <table id="last5">
+            <tr>
+                <th>Inicio</th>
+                <th>Término</th>
+                <th>Comuna</th>
+                <th>Sector</th>
+                <th>Tema</th>
+                <th>Foto</th>
+            </tr>
+            <tr>
+                <td>2025-04-05 09:00</td>
+                <td>2025-04-05 19:00</td>
+                <td>Valdivia</td>
+                <td>Cementerio</td>
+                <td>Funeral del amigo I.L. (lo atraparon)</td>
+                <td><img src="images/vuela-alto.png" alt="tributo: roate el cielo, sweet prince" height="200px" width="130px"></td>
+            </tr>
+            <tr>
+                <td>2025-03-22 23:00</td>
+                <td>-</td>
+                <td>Valdivia</td>
+                <td>Casino Dreams</td>
+                <td>Ganar unas chauchas para comprarle casas a nuestras mamás!!!</td>
+                <td><img src="images/dreams-noche.JPG" alt="casino Dreams de Valdivia de noche" height="175px" width="130px"></td>
+            </tr>
+            <tr>
+                <td>2025-03-15 17:00</td>
+                <td>2025-03-15 18:00</td>
+                <td>Valdivia</td>
+                <td>Sgto. Aldea #69</td>
+                <td>Preparación ida al casino</td>
+                <td><img src="images/cheating-at-poker.jpg" alt="portada de libro sobre hacer trampa en el póker" height="130px" width="130px"></td>
+            </tr>
+            <tr>
+                <td>2025-02-19 10:00</td>
+                <td>2025-02-19 13:00</td>
+                <td>Valdivia</td>
+                <td>Sgto. Aldea #69</td>
+                <td>Aprender a jugar póker</td>
+                <td><img src="images/poker-dummies.jpg" alt="portada de libro sobre cómo jugar póker" height="164px" width="130px"></td>
+            </tr>
+            <tr>
+                <td>2025-01-02 12:30</td>
+                <td>2025-01-02 14:00</td>
+                <td>Santiago Centro</td>
+                <td>Club Hípico #1001</td>
+                <td>Celebrar el inicio de año viendo carreras de caballos por primera vez!!</td>
+                <td><img src="images/horse-race.jpg" alt="foto de caballos en carrera" height="130px" width="130px"></td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
