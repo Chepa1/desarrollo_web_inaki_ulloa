@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar una actividad!</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1 id="h1-donde">Agregar actividad</h1>
+    <a href="../index.html"> Volver al inicio</a>
+    <div class="main-container">
+        <div class="container">
+            <form name="form-donde" method="post" enctype="multipart/form-data">
+                <h2 id="h2-donde">¿Dónde?</h2>
+
+                <label for="select-region">Región</label>
+                <select name="select-region" id="select-region" required>
+                    <option value="">Seleccione una región</option>
+                </select><br>
+
+                <label for="select-comuna">Comuna</label>
+                <select name="select-comuna" id="select-comuna" required>
+                    <option value="">Seleccione una comuna</option>
+                </select><br>
+
+                <label for="sector">Sector</label>
+                <input type="text" name="sector" id="sector" maxlength="100"><br>
+
+                <h2>¿Quién organiza?</h2>
+
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" maxlength="200" required><br>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" maxlength="100" required><br>
+
+                <label for="phone">Número de celular</label>
+                <input type="tel" name="phone" id="phone" pattern="\+569[0-9]{8}" placeholder="+56912345678"><br>
+
+                <label for="select-forma-contacto">Contactar por</label>
+                <select name="select-forma-contacto" id="select-forma-contacto">
+                    <option value="">Seleccione una forma de contacto preferida</option>
+                </select><br>
+                <input type="text" id="url-contacto" name="url-contacto" minlength="4" maxlength="50" placeholder="Ingresa el url de tu perfil o tu ID de usuario" hidden>
+
+                <h2>¿Cuándo y de qué trata?</h2>
+
+                <label for="tiempo-inicio">Día y hora de inicio</label>
+                <input type="datetime-local" name="tiempo-inicio" id="tiempo-inicio" value="" required><br>
+
+                <label for="tiempo-termino">Día y hora de término</label>
+                <input type="datetime-local" name="tiempo-termino" id="tiempo-termino" value=""><br>
+
+                <label for="descripcion">Descripción</label>
+                <textarea name="descripcion" id="descripcion" cols="50" rows="10"></textarea><br>
+
+                <label for="select-tema">Tema</label>
+                <select name="select-tema" id="select-tema" required>
+                    <option value="">Seleccione un tema</option>
+                </select>
+                <input type="text" id="otro-tema" name="otro-tema" minlength="3" maxlength="15" placeholder="Ingresa otro tema" hidden><br>
+                
+                <label for="foto1">Foto</label>
+                <input type="file" name="foto1" id="foto1" required>
+                <input type="button" value="Agregar otra foto" id="agregar-foto1">
+
+                <div class="hidden-foto1" hidden>
+                    <input type="file" name="foto2" id="foto2" >
+                    <input type="button" value="Agregar otra foto" id="agregar-foto2">
+                </div>
+
+                <div class="hidden-foto2" hidden>
+                    <input type="file" name="foto3" id="foto3" >
+                    <input type="button" value="Agregar otra foto" id="agregar-foto3">
+                </div>
+
+                <div class="hidden-foto3" hidden>
+                    <input type="file" name="foto4" id="foto4" >
+                    <input type="button" value="Agregar otra foto" id="agregar-foto4">
+                </div>
+
+                <div class="hidden-foto4" hidden>
+                    <input type="file" name="foto5" id="foto5" >
+                    <input type="button" value="Agregar otra foto" id="agregar-foto5">
+                </div>
+                <input type="button" value="Agregar esta actividad">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
