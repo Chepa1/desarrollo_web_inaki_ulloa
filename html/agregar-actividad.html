@@ -65,26 +65,25 @@
                 <input type="file" name="foto1" id="foto1" required>
                 <input type="button" value="Agregar otra foto" id="agregar-foto1">
 
-                <div class="hidden-foto1" hidden>
+                <div class="hidden-foto" id="hidden-foto1" hidden>
                     <input type="file" name="foto2" id="foto2" >
                     <input type="button" value="Agregar otra foto" id="agregar-foto2">
                 </div>
 
-                <div class="hidden-foto2" hidden>
+                <div class="hidden-foto" id="hidden-foto2" hidden>
                     <input type="file" name="foto3" id="foto3" >
                     <input type="button" value="Agregar otra foto" id="agregar-foto3">
                 </div>
 
-                <div class="hidden-foto3" hidden>
+                <div class="hidden-foto" id="hidden-foto3" hidden>
                     <input type="file" name="foto4" id="foto4" >
                     <input type="button" value="Agregar otra foto" id="agregar-foto4">
                 </div>
 
-                <div class="hidden-foto4" hidden>
+                <div class="hidden-foto" id="hidden-foto4" hidden>
                     <input type="file" name="foto5" id="foto5" >
-                    <input type="button" value="Agregar otra foto" id="agregar-foto5">
                 </div>
-                <input type="button" value="Agregar esta actividad">
+                <input type="button" id="send-act-btn" value="Agregar esta actividad">
             </form>
         </div>
         <div class="container2 center" id="confirmation-box" hidden>
@@ -100,5 +99,6 @@
     </div>
 
     <script src="/js/select.js"></script>
+    <script src="/js/agregar-actividad.js"></script>
 </body>
 </html>
