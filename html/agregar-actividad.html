@@ -10,7 +10,7 @@
     <h1 id="h1-donde">Agregar actividad</h1>
     <a href="../index.html"> Volver al inicio</a>
     <div class="main-container">
-        <div class="container">
+        <div class="container" id="form-add">
             <form name="form-donde" method="post" enctype="multipart/form-data">
                 <h2 id="h2-donde">¿Dónde?</h2>
 
@@ -87,6 +87,18 @@
                 <input type="button" value="Agregar esta actividad">
             </form>
         </div>
+        <div class="container2 center" id="confirmation-box" hidden>
+            <h2>Confirmación</h2>
+            <p>¿Está seguro de que desea agregar esta actividad?</p>
+            <input type="button" value="Sí, estoy seguro" id="sure-btn">
+            <input type="button" value="No, no estoy seguro, quiero volver al formulario" id="notsure-btn">
+        </div>
+        <div class="container2 center" id="congrats-box" hidden>
+            <h2>¡Actividad agregada con exito!</h2>
+            <p>Hemos recibido su información, muchas gracias y suerte en su actividad.</p>
+        </div>
     </div>
+
+    <script src="/js/select.js"></script>
 </body>
 </html>
