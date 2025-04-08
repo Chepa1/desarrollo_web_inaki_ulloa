@@ -161,7 +161,7 @@ const validateForm = () => {
         let formDiv = document.getElementById("form-add");
         validationBox.hidden = true;
         formDiv.style.display = "none";
-        confirmationBox.style.display = "block";
+        confirmationBox.hidden = false;
     }
 }
 
