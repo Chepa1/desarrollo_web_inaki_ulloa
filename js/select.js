@@ -118,6 +118,35 @@ const checkOtro = () => {
     }
 };
 
+const setDefaultDates = () => {
+    let fechaActual = new Date()
+
+    let anno = fechaActual.getFullYear()
+    let mes = String(fechaActual.getMonth() + 1).padStart(2, "0")
+    let dia = String(fechaActual.getDate()).padStart(2, "0")
+    let hora = String(fechaActual.getHours()).padStart(2, "0")
+    let min = String(fechaActual.getMinutes()).padStart(2, "0")
+
+    let fechaFormateada = `${anno}-${mes}-${dia}T${hora}:${min}`
+
+    let tiempoInicio = document.getElementById("tiempo-inicio")
+    tiempoInicio.value = fechaFormateada
+
+    let fechaTer = new Date(fechaActual)
+    fechaTer.setHours(fechaActual.getHours() + 3)
+
+    let annoFin = fechaTer.getFullYear()
+    let mesFin = String(fechaTer.getMonth() + 1).padStart(2, "0")
+    let diaFin = String(fechaTer.getDate()).padStart(2, "0")
+    let horaFin = String(fechaTer.getHours()).padStart(2, "0")
+    let minFin = String(fechaTer.getMinutes()).padStart(2, "0")
+
+    let fechaTerFormateada = `${annoFin}-${mesFin}-${diaFin}T${horaFin}:${minFin}`
+
+    let tiempoTermino = document.getElementById("tiempo-termino")
+    tiempoTermino.value = fechaTerFormateada
+}
+
 document.getElementById("select-region").addEventListener("change", updateComuna);
 document.getElementById("select-forma-contacto").addEventListener("change", mostrarUrlContacto);
 document.getElementById("select-tema").addEventListener("change", checkOtro);
@@ -126,4 +155,5 @@ window.onload = () => {
     poblarRegion();
     poblarRRSS();
     poblarTema();
+    setDefaultDates();
 };
