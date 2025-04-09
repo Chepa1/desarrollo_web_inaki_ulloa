@@ -83,7 +83,35 @@ const validateTema = (tema) => {
 };
 
 const validateFotos = (foto) => {
-    if (!foto) return false;
+    let myForm = document.forms["form-donde"];
+
+  // Verificar foto1 siempre visible y obligatoria
+    if (!myForm["foto1"].files || !myForm["foto1"].files[0]) {
+        return false;
+    }
+
+  // Verificar fotos si están visibles
+    let hiddenFoto1 = document.getElementById("hidden-foto1")
+    if (hiddenFoto1.style.display === "block" && (!myForm["foto2"].files || !myForm["foto2"].files[0])) {
+        return false;
+    }
+
+    let hiddenFoto2 = document.getElementById("hidden-foto2")
+    if (hiddenFoto2.style.display === "block" && (!myForm["foto3"].files || !myForm["foto3"].files[0])) {
+        return false;
+    }
+
+    let hiddenFoto3 = document.getElementById("hidden-foto3")
+    if (hiddenFoto3.style.display === "block" && (!myForm["foto4"].files || !myForm["foto4"].files[0])) {
+        return false;
+    }
+
+    let hiddenFoto4 = document.getElementById("hidden-foto4")
+    if (hiddenFoto4.style.display === "block" && (!myForm["foto5"].files || !myForm["foto5"].files[0])) {
+        return false;
+    }
+
+    return true;
 };
 
 const validateForm = () => {
@@ -132,6 +160,9 @@ const validateForm = () => {
     }
     if (!validateTema(tema)) {
         setInvalidInput("Tema");
+    }
+    if (!validateFotos()) {
+        setInvalidInput("Fotos");
     }
 
     let validationBox = document.getElementById("val-box");
