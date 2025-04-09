@@ -1,12 +1,27 @@
+/* 
+Paleta de colores:
+- Forest Green (#4a7c59) - Header background, card titles, secondary buttons
+- Leaf Green (#8cb369) - Hero section background, icons, base for lighter shades
+- Sunset Orange (#f4a259) - Primary buttons and call-to-action elements
+- Deep Blue (#2e4052) - Text, section titles, footer background
+- Soft Cream (#f5f7f0) - Main background color and subtle elements
+
+Variaciones:
+- Darker shade of Sunset Orange (#e8863a) - Button hover states
+- Darker shade of Forest Green (#3d6549) - Button hover states
+- Light shade of Leaf Green (#f0f4e8) - Card headers and footers
+- Very light shade of Leaf Green (#d9e2c3) - Borders
+*/
+
 body {
-    /* Using Soft Cream (#f5f7f0) as the main background color */
-    background-color: #f5f7f0;
+    background-color: #f5f7f0; /* Soft Cream */
     color: #2e4052; /* Deep Blue for text */
     line-height: 1.6;
 }
 
 #h1-donde {
     text-align: center;
+    color: #4a7c59; /* Forest Green */
 }
 
 .main-container {
@@ -25,14 +40,17 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
+    border: 1px solid #d9e2c3; /* Very light shade of Leaf Green for borders */
 }
 
 .container {
     max-width: 400px;
+    background-color: #f0f4e8; /* Light shade of Leaf Green */
 }
 
 .container2 {
     max-width: 450px;
+    background-color: #f0f4e8; /* Light shade of Leaf Green */
 }
 
 td,
@@ -48,7 +66,7 @@ td,
 #add-act,
 #see-act,
 #stats {
-    background-color: #f4a259;
+    background-color: #f4a259; /* Sunset Orange */
     color: white;
     font-size: 20px;
     padding: 2% 5%;
@@ -56,23 +74,24 @@ td,
     cursor: pointer;
     border: none;
     border-radius: 8px;
+    transition: background-color 0.3s ease;
 }
 
 #add-act:hover,
 #see-act:hover,
 #stats:hover {
-    background-color: #e8863a;
+    background-color: #e8863a; /* Darker shade of Sunset Orange */
 }
 
 header {
-    background-color: #4a7c59;
+    background-color: #4a7c59; /* Forest Green */
     color: white;
     padding: 1rem;
 }
 
 #option-section {
     color: white;
-    background-color: #8cb369;
+    background-color: #8cb369; /* Leaf Green */
 }
 
 input[type="email"],
@@ -84,7 +103,7 @@ input[type="datetime-local"],
 select {
     padding: 8px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #d9e2c3; /* Very light shade of Leaf Green */
     border-radius: 4px;
     font-size: 14px;
     box-sizing: border-box;
@@ -92,7 +111,7 @@ select {
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 10px;
-    color: #333;
+    color: #2e4052; /* Deep Blue */
 }
 
 input[type="email"],
@@ -106,5 +125,72 @@ select {
 }
 
 input[type="file"] {
-    width: 60%;
+    width: 50%;
+}
+
+/* Nuevos estilos para botones y enlaces */
+input[type="button"], 
+.btn-volver {
+    background-color: #4a7c59; /* Forest Green */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+input[type="button"]:hover,
+.btn-volver:hover {
+    background-color: #3d6549; /* Darker shade of Forest Green */
+}
+
+#send-act-btn, 
+#sure-btn {
+    background-color: #f4a259; /* Sunset Orange */
+}
+
+#send-act-btn:hover,
+#sure-btn:hover {
+    background-color: #e8863a; /* Darker shade of Sunset Orange */
+}
+
+/* Estilos para tablas */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    border: 1px solid #d9e2c3; /* Very light shade of Leaf Green */
+}
+
+th {
+    background-color: #4a7c59; /* Forest Green */
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 8px;
+    border: 1px solid #d9e2c3; /* Very light shade of Leaf Green */
+}
+
+tr:nth-child(even) {
+    background-color: #f0f4e8; /* Light shade of Leaf Green */
+}
+
+tr:hover {
+    background-color: #d9e2c3; /* Very light shade of Leaf Green */
+}
+
+/* Estilos para mensajes de validación */
+#val-box {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 6px solid;
+}
+
+#val-msg {
+    margin-top: 0;
 }
