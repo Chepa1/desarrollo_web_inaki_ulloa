@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado de Actividades</title>
+    <link rel="stylesheet" type="text/css" href="../css/ver-listado.css">
+    <script src="../js/ver-listado.js" defer></script>
 </head>
 <body>
-    <h1>Listado de Actividades</h1>
-    
-    <div class="container">
+    <h1 id="h1-donde">Listado de Actividades</h1>
+    <div id="listado-section">
         <div class="tb-center">
-            <table id="last5">
+            <table id="actividades-tabla">
                 <tr>
                     <th>Inicio</th>
                     <th>Término</th>
@@ -20,58 +21,246 @@
                     <th>Nombre organizador</th>
                     <th>Total fotos</th>
                 </tr>
-                <tr>
+                <tr id="fila-1">
                     <td>2025-04-05 09:00</td>
                     <td>2025-04-05 19:00</td>
                     <td>Valdivia</td>
                     <td>Cementerio</td>
                     <td>Funeral del amigo I.L. (lo atraparon)</td>
                     <td>Iñaki Ulloa Betancourt</td>
-                    <td><img src="../images/vuela-alto.png" alt="tributo: roate el cielo, sweet prince" height="200" width="130"></td>
+                    <td><img src="../images/vuela-alto.png" alt="tributo: roate el cielo, sweet prince" width="130" height="200"></td>
                 </tr>
-                <tr>
+                <tr id="fila-2">
                     <td>2025-03-22 23:00</td>
                     <td>-</td>
                     <td>Valdivia</td>
                     <td>Casino Dreams</td>
                     <td>Ganar unas chauchas para comprarle casas a nuestras mamás!!!</td>
                     <td>Iñaki Ulloa Betancourt</td>
-                    <td><img src="../images/dreams-noche.JPG" alt="casino Dreams de Valdivia de noche" height="175" width="130"></td>
+                    <td><img src="../images/dreams-noche.JPG" alt="casino Dreams de Valdivia de noche" width="130" height="175"></td>
                 </tr>
-                <tr>
+                <tr id="fila-3">
                     <td>2025-03-15 17:00</td>
                     <td>2025-03-15 18:00</td>
                     <td>Valdivia</td>
                     <td>Sgto. Aldea #69</td>
                     <td>Preparación ida al casino</td>
                     <td>Iñaki Ulloa Betancourt</td>
-                    <td><img src="../images/cheating-at-poker.jpg" alt="portada de libro sobre hacer trampa en el póker" height="130" width="130"></td>
+                    <td><img src="../images/cheating-at-poker.jpg" alt="portada de libro sobre hacer trampa en el póker" width="130" height="130"></td>
                 </tr>
-                <tr>
+                <tr id="fila-4">
                     <td>2025-02-19 10:00</td>
                     <td>2025-02-19 13:00</td>
                     <td>Valdivia</td>
                     <td>Sgto. Aldea #69</td>
                     <td>Aprender a jugar póker</td>
                     <td>Iñaki Ulloa Betancourt</td>
-                    <td><img src="../images/poker-dummies.jpg" alt="portada de libro sobre cómo jugar póker" height="164" width="130"></td>
+                    <td><img src="../images/poker-dummies.jpg" alt="portada de libro sobre cómo jugar póker" width="130" height="164"></td>
                 </tr>
-                <tr>
+                <tr id="fila-5">
                     <td>2025-01-02 12:30</td>
                     <td>2025-01-02 14:00</td>
                     <td>Santiago Centro</td>
                     <td>Club Hípico #1001</td>
                     <td>Celebrar el inicio de año viendo carreras de caballos por primera vez!!</td>
                     <td>Iñaki Ulloa Betancourt</td>
-                    <td><img src="../images/horse-race.jpg" alt="foto de caballos en carrera" height="130" width="130"></td>
+                    <td><img src="../images/horse-race.jpg" alt="foto de caballos en carrera" width="130" height="130"></td>
                 </tr>
             </table>
         </div>
         
-        <div class="center" style="margin-top: 20px;">
-            <a href="../index.html" id="volver-inicio">Volver al inicio</a>
+        <div class="center">
+            <a href="../index.html" class="btn-volver">Volver a la Portada</a>
         </div>
     </div>
     
+    <!-- detalle para cada actividad -->
+    <div class="container" id="detalle-actividad-1" hidden>
+        <h1>Información de la actividad</h1>
+        
+        <div class="info-section">
+            <h2>Actividad</h2>
+            <p><strong>Tema:</strong> Funeral del amigo I.L. (lo atraparon)</p>
+            <p><strong>Descripción:</strong> Despedida de nuestro querido amigo que finalmente fue atrapado. Traer flores y pañuelos.</p>
+            <p><strong>Inicio:</strong> 2025-04-05 09:00</p>
+            <p><strong>Término:</strong> 2025-04-05 19:00</p>
+            
+            <h2>Lugar</h2>
+            <p><strong>Región:</strong> Los Ríos</p>
+            <p><strong>Comuna:</strong> Valdivia</p>
+            <p><strong>Sector:</strong> Cementerio</p>
+            
+            <h2>Organizador</h2>
+            <p><strong>Nombre:</strong> Iñaki Ulloa Betancourt</p>
+            <p><strong>Correo:</strong> inaki.ulloa@example.com</p>
+            <p><strong>Teléfono:</strong> +569 87654321</p>
+        </div>
+        
+        <div class="fotos-section">
+            <h2>Fotos</h2>
+            <div class="galeria-fotos">
+                <div class="foto-item">
+                    <img src="../images/vuela-alto.png" alt="tributo: roate el cielo, sweet prince" width="320" height="240" class="img-actividad">
+                </div>
+            </div>
+        </div>
+        
+        <div class="botones-navegacion center">
+            <input type="button" value="Volver al Listado" class="btn-volver btn-volver-listado">
+            <a href="../index.html" class="btn-volver">Volver a la Portada</a>
+        </div>
+    </div>
+    
+    <div class="container" id="detalle-actividad-2" hidden>
+        <h1>Información de la actividad</h1>
+        
+        <div class="info-section">
+            <h2>Actividad</h2>
+            <p><strong>Tema:</strong> Ganar unas chauchas para comprarle casas a nuestras mamás!!!</p>
+            <p><strong>Descripción:</strong> Noche de póker y juegos de azar para conseguir dinero y comprarle casas a nuestras madres.</p>
+            <p><strong>Inicio:</strong> 2025-03-22 23:00</p>
+            <p><strong>Término:</strong> -</p>
+            
+            <h2>Lugar</h2>
+            <p><strong>Región:</strong> Los Ríos</p>
+            <p><strong>Comuna:</strong> Valdivia</p>
+            <p><strong>Sector:</strong> Casino Dreams</p>
+            
+            <h2>Organizador</h2>
+            <p><strong>Nombre:</strong> Iñaki Ulloa Betancourt</p>
+            <p><strong>Correo:</strong> inaki.ulloa@example.com</p>
+            <p><strong>Teléfono:</strong> +569 87654321</p>
+        </div>
+        
+        <div class="fotos-section">
+            <h2>Fotos</h2>
+            <div class="galeria-fotos">
+                <div class="foto-item">
+                    <img src="../images/dreams-noche.JPG" alt="casino Dreams de Valdivia de noche" width="320" height="240" class="img-actividad">
+                </div>
+            </div>
+        </div>
+        
+        <div class="botones-navegacion center">
+            <input type="button" value="Volver al Listado" class="btn-volver btn-volver-listado">
+            <a href="../index.html" class="btn-volver">Volver a la Portada</a>
+        </div>
+    </div>
+    
+    <div class="container" id="detalle-actividad-3" hidden>
+        <h1>Información de la actividad</h1>
+        
+        <div class="info-section">
+            <h2>Actividad</h2>
+            <p><strong>Tema:</strong> Preparación ida al casino</p>
+            <p><strong>Descripción:</strong> Sesión de preparación para nuestra visita al casino. Aprenderemos estrategias básicas.</p>
+            <p><strong>Inicio:</strong> 2025-03-15 17:00</p>
+            <p><strong>Término:</strong> 2025-03-15 18:00</p>
+            
+            <h2>Lugar</h2>
+            <p><strong>Región:</strong> Los Ríos</p>
+            <p><strong>Comuna:</strong> Valdivia</p>
+            <p><strong>Sector:</strong> Sgto. Aldea #69</p>
+            
+            <h2>Organizador</h2>
+            <p><strong>Nombre:</strong> Iñaki Ulloa Betancourt</p>
+            <p><strong>Correo:</strong> inaki.ulloa@example.com</p>
+            <p><strong>Teléfono:</strong> +569 87654321</p>
+        </div>
+        
+        <div class="fotos-section">
+            <h2>Fotos</h2>
+            <div class="galeria-fotos">
+                <div class="foto-item">
+                    <img src="../images/cheating-at-poker.jpg" alt="portada de libro sobre hacer trampa en el póker" width="320" height="320" class="img-actividad">
+                </div>
+            </div>
+        </div>
+        
+        <div class="botones-navegacion center">
+            <input type="button" value="Volver al Listado" class="btn-volver btn-volver-listado">
+            <a href="../index.html" class="btn-volver">Volver a la Portada</a>
+        </div>
+    </div>
+    
+    <div class="container" id="detalle-actividad-4" hidden>
+        <h1>Información de la actividad</h1>
+        
+        <div class="info-section">
+            <h2>Actividad</h2>
+            <p><strong>Tema:</strong> Aprender a jugar póker</p>
+            <p><strong>Descripción:</strong> Taller básico para aprender a jugar póker. Traer ganas de aprender y algo para tomar notas.</p>
+            <p><strong>Inicio:</strong> 2025-02-19 10:00</p>
+            <p><strong>Término:</strong> 2025-02-19 13:00</p>
+            
+            <h2>Lugar</h2>
+            <p><strong>Región:</strong> Los Ríos</p>
+            <p><strong>Comuna:</strong> Valdivia</p>
+            <p><strong>Sector:</strong> Sgto. Aldea #69</p>
+            
+            <h2>Organizador</h2>
+            <p><strong>Nombre:</strong> Iñaki Ulloa Betancourt</p>
+            <p><strong>Correo:</strong> inaki.ulloa@example.com</p>
+            <p><strong>Teléfono:</strong> +569 87654321</p>
+        </div>
+        
+        <div class="fotos-section">
+            <h2>Fotos</h2>
+            <div class="galeria-fotos">
+                <div class="foto-item">
+                    <img src="../images/poker-dummies.jpg" alt="portada de libro sobre cómo jugar póker" width="320" height="240" class="img-actividad">
+                </div>
+            </div>
+        </div>
+        
+        <div class="botones-navegacion center">
+            <input type="button" value="Volver al Listado" class="btn-volver btn-volver-listado">
+            <a href="../index.html" class="btn-volver">Volver a la Portada</a>
+        </div>
+    </div>
+    
+    <div class="container" id="detalle-actividad-5" hidden>
+        <h1>Información de la actividad</h1>
+        
+        <div class="info-section">
+            <h2>Actividad</h2>
+            <p><strong>Tema:</strong> Celebrar el inicio de año viendo carreras de caballos por primera vez!!</p>
+            <p><strong>Descripción:</strong> Celebración de año nuevo en el Club Hípico. Primera vez que asistimos a carreras de caballos.</p>
+            <p><strong>Inicio:</strong> 2025-01-02 12:30</p>
+            <p><strong>Término:</strong> 2025-01-02 14:00</p>
+            
+            <h2>Lugar</h2>
+            <p><strong>Región:</strong> Metropolitana</p>
+            <p><strong>Comuna:</strong> Santiago Centro</p>
+            <p><strong>Sector:</strong> Club Hípico #1001</p>
+            
+            <h2>Organizador</h2>
+            <p><strong>Nombre:</strong> Iñaki Ulloa Betancourt</p>
+            <p><strong>Correo:</strong> inaki.ulloa@example.com</p>
+            <p><strong>Teléfono:</strong> +569 87654321</p>
+        </div>
+        
+        <div class="fotos-section">
+            <h2>Fotos</h2>
+            <div class="galeria-fotos">
+                <div class="foto-item">
+                    <img src="../images/horse-race.jpg" alt="foto de caballos en carrera" width="320" height="320" class="img-actividad">
+                </div>
+            </div>
+        </div>
+        
+        <div class="botones-navegacion center">
+            <input type="button" value="Volver al Listado" class="btn-volver btn-volver-listado">
+            <a href="../index.html" class="btn-volver">Volver a la Portada</a>
+        </div>
+    </div>
+    
+    <!-- contenedor para la imagen ampliada -->
+    <div id="imagen-ampliada-container" style="display: none;">
+        <div class="imagen-ampliada-content">
+            <img id="imagen-ampliada" src="/placeholder.svg" alt="">
+            <input type="button" value="Cerrar" id="cerrar-imagen" class="btn-cerrar">
+        </div>
+    </div>
 </body>
 </html>
