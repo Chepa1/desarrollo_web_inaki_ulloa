@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
-import database as db
+import database.db as db
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime

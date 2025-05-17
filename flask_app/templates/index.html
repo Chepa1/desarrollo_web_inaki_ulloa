@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Touch grass!</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Touch grass!{% endblock %}
+{% block body %}
     <header>
         <h1 id="titulo-bienvenida">Por favor toca pasto</h1>
         <p id="msj-bienvenida">Tu familia está suplicando, por favor sal de la casa :c</p>
@@ -14,69 +8,42 @@
 
     <section id="option-section">
         <h2 class="center">Explora una de la siguientes opciones:</h2>
-        <div class="tb-center">
-            <table id="option-buttons">
-                <tr>
-                    <td><a href="html/agregar-actividad.html" id="add-act">Agregar actividad</a></td>
-                    <td><a href="html/ver-listado.html" id="see-act">Ver listado de actividades</a></td>
-                    <td><a href="html/estadisticas.html" id="stats">Estadísticas</a></td>
-                </tr>
-            </table>
-        </div>
+        <ul>
+            <li><a href="{{ url_for('nueva_actividad') }}">Agregar actividad</a></li>
+            <li><a href="{{ url_for('listado_actividades') }}">Ver listado de actividades</a></li>
+            <li><a href="{{ url_for('estadisticas') }}">Ver estadísticas</a></li>
+        </ul>
     </section>
-    
-    <h2 class="center">También puedes echar un vistazo a las últimas actividades registradas:</h2>
-    <div class="tb-center">
-        <table id="last5">
-            <tr>
-                <th>Inicio</th>
-                <th>Término</th>
-                <th>Comuna</th>
-                <th>Sector</th>
-                <th>Tema</th>
-                <th>Foto</th>
-            </tr>
-            <tr>
-                <td>2025-04-05 09:00</td>
-                <td>2025-04-05 19:00</td>
-                <td>Valdivia</td>
-                <td>Cementerio</td>
-                <td>Funeral del amigo I.L. (lo atraparon)</td>
-                <td><img src="images/vuela-alto.png" alt="tributo: roate el cielo, sweet prince" height="200" width="130"></td>
-            </tr>
-            <tr>
-                <td>2025-03-22 23:00</td>
-                <td>-</td>
-                <td>Valdivia</td>
-                <td>Casino Dreams</td>
-                <td>Ganar unas chauchas para comprarle casas a nuestras mamás!!!</td>
-                <td><img src="images/dreams-noche.JPG" alt="casino Dreams de Valdivia de noche" height="175" width="130"></td>
-            </tr>
-            <tr>
-                <td>2025-03-15 17:00</td>
-                <td>2025-03-15 18:00</td>
-                <td>Valdivia</td>
-                <td>Sgto. Aldea #69</td>
-                <td>Preparación ida al casino</td>
-                <td><img src="images/cheating-at-poker.jpg" alt="portada de libro sobre hacer trampa en el póker" height="130" width="130"></td>
-            </tr>
-            <tr>
-                <td>2025-02-19 10:00</td>
-                <td>2025-02-19 13:00</td>
-                <td>Valdivia</td>
-                <td>Sgto. Aldea #69</td>
-                <td>Aprender a jugar póker</td>
-                <td><img src="images/poker-dummies.jpg" alt="portada de libro sobre cómo jugar póker" height="164" width="130"></td>
-            </tr>
-            <tr>
-                <td>2025-01-02 12:30</td>
-                <td>2025-01-02 14:00</td>
-                <td>Santiago Centro</td>
-                <td>Club Hípico #1001</td>
-                <td>Celebrar el inicio de año viendo carreras de caballos por primera vez!!</td>
-                <td><img src="images/horse-race.jpg" alt="foto de caballos en carrera" height="130" width="130"></td>
-            </tr>
+
+    <div id="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Inicio</th>
+                    <th>Término</th>
+                    <th>Comuna</th>
+                    <th>Sector</th>
+                    <th>Descripción</th>
+                    <th>Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for act in actividades %}
+                <tr>
+                    <td>{{ act.dia_hora_inicio.strftime("%Y-%m-%d %H:%M") }}</td>
+                    <td>{{ act.dia_hora_termino.strftime("%Y-%m-%d %H:%M") if act.dia_hora_termino }}</td>
+                    <td>{{ act.comuna.nombre }}</td>
+                    <td>{{ act.sector }}</td>
+                    <td>{{ act.descripcion }}</td>
+                    <td>
+                        {% if act.fotos %}
+                        <img src="{{ url_for('static', filename='uploads/' ~ act.fotos[0].nombre_archivo) }}" alt="Foto actividad" height="130" width="130">
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
-</body>
-</html>
+{% endblock %}
+{% block scripts %}{% endblock %}
