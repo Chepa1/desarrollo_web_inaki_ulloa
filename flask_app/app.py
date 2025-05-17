@@ -14,8 +14,12 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # Rutas
 @app.route("/", methods=["GET"])
 def index():
-    actividades = db.list_actividades()
-    return render_template("index.html", actividades=actividades)
+    session = db.SessionLocal()
+    actividades = session.query(db.Actividad).order_by(db.Actividad.dia_hora_inicio.desc()).limit(5).all()
+    output = render_template("index.html", actividades=actividades)
+    session.close()
+    return output
+
 
 @app.route("/actividad/nueva", methods=["GET", "POST"])
 def nueva_actividad():
