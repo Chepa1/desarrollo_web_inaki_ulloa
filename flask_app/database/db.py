@@ -1,94 +1,67 @@
-import pymysql
-import json
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import sessionmaker, declarative_base, relationship
 
-DB_NAME = "confessions_db"
-DB_USERNAME = "cc5002" #cc5002
-DB_PASSWORD = "programacionweb" #programacionweb
+DB_NAME = "tarea2"
+DB_USERNAME = "cc5002"
+DB_PASSWORD = "programacionweb"
 DB_HOST = "localhost"
 DB_PORT = 3306
-DB_CHARSET = "utf8"
+DATABASE_URL = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-with open('database/querys.json', 'r') as querys:
-	QUERY_DICT = json.load(querys)
+engine = create_engine(DATABASE_URL, echo=False)
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()
 
-# -- conn ---
+class Region(Base):
+    __tablename__ = "region"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(200), nullable=False)
+    comunas = relationship("Comuna", back_populates="region")
 
-def get_conn():
-	conn = pymysql.connect(
-		db=DB_NAME,
-		user=DB_USERNAME,
-		passwd=DB_PASSWORD,
-		host=DB_HOST,
-		port=DB_PORT,
-		charset=DB_CHARSET
-	)
-	return conn
+class Comuna(Base):
+    __tablename__ = "comuna"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(200), nullable=False)
+    region_id = Column(Integer, ForeignKey("region.id"), nullable=False)
+    region = relationship("Region", back_populates="comunas")
+    actividades = relationship("Actividad", back_populates="comuna")
 
-# -- querys --
+class Actividad(Base):
+    __tablename__ = "actividad"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    comuna_id = Column(Integer, ForeignKey("comuna.id"), nullable=False)
+    sector = Column(String(100))
+    nombre = Column(String(200), nullable=False)
+    email = Column(String(100), nullable=False)
+    celular = Column(String(15))
+    dia_hora_inicio = Column(DateTime, nullable=False)
+    dia_hora_termino = Column(DateTime)
+    descripcion = Column(String(500))
+    comuna = relationship("Comuna", back_populates="actividades")
+    fotos = relationship("Foto", back_populates="actividad", cascade="all, delete")
+    contactos = relationship("ContactarPor", back_populates="actividad", cascade="all, delete")
+    temas = relationship("ActividadTema", back_populates="actividad", cascade="all, delete")
 
-def get_user_by_id(id):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["get_user_by_id"], (id,))
-	user = cursor.fetchone()
-	return user
+class Foto(Base):
+    __tablename__ = "foto"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    ruta_archivo = Column(String(300), nullable=False)
+    nombre_archivo = Column(String(300), nullable=False)
+    actividad_id = Column(Integer, ForeignKey("actividad.id"), nullable=False)
+    actividad = relationship("Actividad", back_populates="fotos")
 
-def get_user_by_email(email):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["get_user_by_email"], (email,))
-	user = cursor.fetchone()
-	return user
+class ContactarPor(Base):
+    __tablename__ = "contactar_por"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(50), nullable=False)
+    identificador = Column(String(150), nullable=False)
+    actividad_id = Column(Integer, ForeignKey("actividad.id"), nullable=False)
+    actividad = relationship("Actividad", back_populates="contactos")
 
-def get_user_by_username(username):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["get_user_by_username"], (username,))
-	user = cursor.fetchone()
-	return user
-
-def create_user(username, password, email):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["create_user"], (username, password, email))
-	conn.commit()
-
-def get_confessions(page_size):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["get_confessions"], (page_size,))
-	confessions = cursor.fetchall()
-	return confessions
-
-def create_confession(conf_text, conf_img, user_id):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["create_confession"], (conf_text, conf_img, user_id))
-	conn.commit()
-	
-
-# -- db-related functions --
-
-def register_user(username, password, email):
-	# 1. check the email is not in use
-	_email_user = get_user_by_email(email)
-	if _email_user is not None:
-		return False, "El correo ya esta en uso."
-	# 2. check the username is not in use
-	_username_user = get_user_by_username(username)
-	if _username_user is not None:
-		return False, "El nombre de usuario esta en uso."
-	# 3. create user
-	create_user(username, password, email)
-	return True, None
-
-def login_user(username, password):
-	a_user = get_user_by_username(username)
-	if a_user is None:
-		return False, "Usuario o contraseña incorrectos."
-
-	a_user_passwd = a_user[3]
-	if a_user_passwd != password:
-		return False, "Usuario o contraseña incorrectos."
-	return True, None
-
+class ActividadTema(Base):
+    __tablename__ = "actividad_tema"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    tema = Column(String(50), nullable=False)
+    glosa_otro = Column(String(15))
+    actividad_id = Column(Integer, ForeignKey("actividad.id"), nullable=False)
+    actividad = relationship("Actividad", back_populates="temas")
