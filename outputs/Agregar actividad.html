@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Agregar actividad</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        
+    </head>
+    <body>
+        
+    <h1 id="h1-donde">Agregar actividad</h1>
+    <a href="/">Volver al inicio</a>
+    <div class="main-container">
+        <div id="val-box" hidden>
+            <h2 id="val-msg">Los siguientes campos son inválidos:</h2>
+            <ul id="val-list">
+                
+            </ul>
+        </div>
+        <div class="container" id="form-add">
+            <form name="form-donde" method="post" action="/actividad/nueva" enctype="multipart/form-data">
+                <h2 id="h2-donde">¿Dónde?</h2>
+
+                <label for="select-region">Región</label>
+                <select name="select-region" id="select-region" required>
+                    <option value="">Seleccione una región</option>
+                </select><br>
+
+                <label for="select-comuna">Comuna</label>
+                <select name="select-comuna" id="select-comuna" required>
+                    <option value="">Seleccione una comuna</option>
+                </select><br>
+
+                <label for="sector">Sector</label>
+                <input type="text" name="sector" id="sector" maxlength="100"><br>
+
+                <h2>¿Quién organiza?</h2>
+
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" id="nombre" maxlength="200" required><br>
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" maxlength="100" required><br>
+
+                <label for="phone">Número de celular</label>
+                <input type="tel" name="phone" id="phone" pattern="\+569[0-9]{8}" placeholder="+56912345678"><br>
+
+                <label for="select-forma-contacto">Contactar por</label>
+                <select name="select-forma-contacto" id="select-forma-contacto">
+                    <option value="">Seleccione una forma de contacto preferida</option>
+                </select><br>
+                <input type="text" id="url-contacto" name="url-contacto" minlength="4" maxlength="50" placeholder="Ingresa el url de tu perfil o tu ID de usuario" hidden>
+
+                <h2>¿Cuándo y de qué trata?</h2>
+
+                <label for="tiempo-inicio">Día y hora de inicio</label>
+                <input type="datetime-local" name="tiempo-inicio" id="tiempo-inicio" required><br>
+
+                <label for="tiempo-termino">Día y hora de término</label>
+                <input type="datetime-local" name="tiempo-termino" id="tiempo-termino"><br>
+
+                <label for="descripcion">Descripción</label>
+                <textarea name="descripcion" id="descripcion" cols="50" rows="10"></textarea><br>
+
+                <label for="select-tema">Tema</label>
+                <select name="select-tema" id="select-tema" required>
+                    <option value="">Seleccione un tema</option>
+                </select>
+                <input type="text" id="otro-tema" name="otro-tema" minlength="3" maxlength="15" placeholder="Ingresa otro tema" hidden><br>
+                
+                <label for="foto1">Foto</label>
+                <input type="file" name="foto1" id="foto1" accept="image/*" required>
+                <input type="button" value="Agregar otra foto" id="agregar-foto1">
+
+                <div class="hidden-foto" id="hidden-foto1" hidden>
+                    <input type="file" name="foto2" id="foto2" accept="image/*">
+                    <input type="button" value="Agregar otra foto" id="agregar-foto2">
+                </div>
+
+                <div class="hidden-foto" id="hidden-foto2" hidden>
+                    <input type="file" name="foto3" id="foto3" accept="image/*">
+                    <input type="button" value="Agregar otra foto" id="agregar-foto3">
+                </div>
+
+                <div class="hidden-foto" id="hidden-foto3" hidden>
+                    <input type="file" name="foto4" id="foto4" accept="image/*">
+                    <input type="button" value="Agregar otra foto" id="agregar-foto4">
+                </div>
+
+                <div class="hidden-foto" id="hidden-foto4" hidden>
+                    <input type="file" name="foto5" id="foto5" accept="image/*">
+                </div>
+
+                <input type="button" id="send-act-btn" value="Agregar esta actividad">
+            </form>
+        </div>
+        <div class="container2 center" id="confirmation-box" hidden>
+            <h2>Confirmación</h2>
+            <p>¿Está seguro de que desea agregar esta actividad?</p>
+            <input type="button" value="Sí, estoy seguro" id="sure-btn">
+            <input type="button" value="No, no estoy seguro, quiero volver al formulario" id="notsure-btn">
+        </div>
+        <div class="container2 center" id="congrats-box" hidden>
+            <h2>¡Actividad agregada con éxito!</h2>
+            <p>Hemos recibido su información, muchas gracias y suerte en su actividad.</p>
+        </div>
+    </div>
+
+        
+    <script src="/static/js/select.js"></script>
+    <script src="/static/js/agregar-fotos.js"></script>
+    <script src="/static/js/validation.js"></script>
+    <script src="/static/js/misc.js"></script>
+
+    </body>
+</html>
