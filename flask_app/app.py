@@ -88,7 +88,7 @@ def nueva_actividad():
                 file.save(filepath)
                 db.add_foto(nueva.id, filepath, filename)
         return redirect(url_for("index"))
-    return render_template("agregar-actividad.html")
+    return render_template("agregar-actividad.html", errores={},data={})
 
 @app.route("/actividades", methods=["GET"])
 def listado_actividades():

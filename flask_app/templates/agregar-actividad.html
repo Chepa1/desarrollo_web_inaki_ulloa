@@ -4,9 +4,13 @@
     <h1 id="h1-donde">Agregar actividad</h1>
     <a href="{{ url_for('index') }}">Volver al inicio</a>
     <div class="main-container">
-        <div id="val-box" hidden>
-            <h2 id="val-msg"></h2>
-            <ul id="val-list"></ul>
+        <div id="val-box" {% if not errores %}hidden{% endif %}>
+            <h2 id="val-msg">Los siguientes campos son inválidos:</h2>
+            <ul id="val-list">
+                {% for campo, msg in errores.items() %}
+                <li><strong>{{ campo }}</strong>: {{ msg }}</li>
+                {% endfor %}
+            </ul>
         </div>
         <div class="container" id="form-add">
             <form name="form-donde" method="post" action="{{ url_for('nueva_actividad') }}" enctype="multipart/form-data">
@@ -101,4 +105,5 @@
     <script src="{{ url_for('static', filename='js/select.js') }}"></script>
     <script src="{{ url_for('static', filename='js/agregar-fotos.js') }}"></script>
     <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/misc.js') }}"></script>
 {% endblock %}

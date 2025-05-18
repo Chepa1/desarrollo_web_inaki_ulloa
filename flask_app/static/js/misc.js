@@ -7,13 +7,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const sureBtn = document.getElementById("sure-btn")
     const notSureBtn = document.getElementById("notsure-btn")
 
-    addBtn.addEventListener("click", function() {
-        formBox.hidden = true
-        confirmBox.hidden = false
-    })
+    
 
     notSureBtn.addEventListener("click", function() {
         confirmBox.hidden = true
+        formBox.style.display = "";
         formBox.hidden = false
     })
 
