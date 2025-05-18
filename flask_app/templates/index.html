@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% block title %}Touch grass!{% endblock %}
+
 {% block body %}
     <header>
         <h1 id="titulo-bienvenida">Por favor toca pasto</h1>
@@ -8,23 +10,33 @@
 
     <section id="option-section">
         <h2 class="center">Explora una de la siguientes opciones:</h2>
-        <ul>
-            <li><a href="{{ url_for('nueva_actividad') }}">Agregar actividad</a></li>
-            <li><a href="{{ url_for('listado_actividades') }}">Ver listado de actividades</a></li>
-            <li><a href="{{ url_for('estadisticas') }}">Ver estadísticas</a></li>
-        </ul>
+        <div class="tb-center">
+            <table id="option-buttons">
+                <tr>
+                    <td>
+                        <a href="{{ url_for('nueva_actividad') }}" id="add-act">Agregar actividad</a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('listado_actividades') }}" id="see-act">Ver listado de actividades</a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('estadisticas') }}" id="stats">Ver estadísticas</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </section>
-
-    <div id="table-container">
-        <table>
+    
+    <h2 class="center">También puedes echar un vistazo a las últimas actividades registradas:</h2>
+    <div class="tb-center">
+        <table id="last5">
             <thead>
                 <tr>
                     <th>Inicio</th>
                     <th>Término</th>
                     <th>Comuna</th>
                     <th>Sector</th>
-                    <th>Nombre organizador</th>
-                    <th>Descripción</th>
+                    <th>Tema</th>
                     <th>Foto</th>
                 </tr>
             </thead>
@@ -32,14 +44,29 @@
                 {% for act in actividades %}
                 <tr>
                     <td>{{ act.dia_hora_inicio.strftime("%Y-%m-%d %H:%M") }}</td>
-                    <td>{% if act.dia_hora_termino %}{{ act.dia_hora_termino.strftime("%Y-%m-%d %H:%M") }}{% endif %}</td>
+                    <td>
+                        {% if act.dia_hora_termino %}
+                            {{ act.dia_hora_termino.strftime("%Y-%m-%d %H:%M") }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
                     <td>{{ act.comuna.nombre }}</td>
-                    <td>{{ act.sector }}</td>
-                    <td>{{ act.nombre }}</td>
-                    <td>{{ act.descripcion }}</td>
+                    <td>{{ act.sector or "-" }}</td>
+                    <td>
+                        {% for t in act.temas %}
+                            {{ t.tema }}{% if t.glosa_otro %} – {{ t.glosa_otro }}{% endif %}
+                        {% endfor %}
+                    </td>
                     <td>
                         {% if act.fotos %}
-                        <img src="{{ url_for('static', filename='uploads/' ~ act.fotos[0].nombre_archivo) }}" alt="Foto actividad" height="130" width="130">
+                            <img
+                            src="{{ url_for('static', filename='uploads/' ~ act.fotos[0].nombre_archivo) }}"
+                            alt="Foto actividad"
+                            height="130"
+                            width="130"
+                            class="img-index"
+                            >
                         {% endif %}
                     </td>
                 </tr>
@@ -48,4 +75,5 @@
         </table>
     </div>
 {% endblock %}
+
 {% block scripts %}{% endblock %}

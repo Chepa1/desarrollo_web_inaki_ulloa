@@ -3,6 +3,8 @@ import database.db as db
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime
+from math import ceil
+from sqlalchemy import func
 
 UPLOAD_FOLDER = "static/uploads"
 
@@ -55,8 +57,34 @@ def nueva_actividad():
 
 @app.route("/actividades", methods=["GET"])
 def listado_actividades():
-    actividades = db.list_actividades()
-    return render_template("listado.html", actividades=actividades)
+    page = request.args.get("page", 1, type=int)
+    per_page = 5
+
+    session = db.SessionLocal()
+    total = session.query(func.count(db.Actividad.id)).scalar()
+    actividades = (
+        session.query(db.Actividad)
+                .order_by(db.Actividad.dia_hora_inicio.desc())
+                .offset((page-1)*per_page)
+                .limit(per_page)
+                .all()
+    )
+
+    total_pages = ceil(total/per_page)
+    has_prev = page > 1
+    has_next = page < total_pages
+
+    response = render_template(
+        "ver-listado.html",
+        actividades=actividades,
+        page=page,
+        total_pages=total_pages,
+        has_prev=has_prev,
+        has_next=has_next
+    )
+    session.close()
+    return response
+
 
 @app.route("/actividades/<int:actividad_id>", methods=["GET"])
 def detalle_actividad(actividad_id):
