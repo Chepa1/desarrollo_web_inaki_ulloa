@@ -84,6 +84,7 @@ def create_actividad(data):
     session.commit()
     session.refresh(nueva)
     session.close()
+    return nueva
 
 def add_tema(actividad_id, tema, glosa_otro=None):
     session = SessionLocal()

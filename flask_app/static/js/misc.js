@@ -1,18 +1,37 @@
-const showCongrats = () => {
-    let congrats = document.getElementById("congrats-box");
-    let confirmationBox = document.getElementById("confirmation-box");
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.forms["form-donde"]
+    const addBtn = document.getElementById("send-act-btn")
+    const confirmBox = document.getElementById("confirmation-box")
+    const formBox = document.getElementById("form-add")
+    const congratsBox = document.getElementById("congrats-box")
+    const sureBtn = document.getElementById("sure-btn")
+    const notSureBtn = document.getElementById("notsure-btn")
 
-    confirmationBox.hidden = true;
-    congrats.hidden = false;
-}
+    addBtn.addEventListener("click", function() {
+        formBox.hidden = true
+        confirmBox.hidden = false
+    })
 
-const backToForm = () => {
-    let form = document.getElementById("form-add");
-    let confirmationBox = document.getElementById("confirmation-box");
+    notSureBtn.addEventListener("click", function() {
+        confirmBox.hidden = true
+        formBox.hidden = false
+    })
 
-    confirmationBox.hidden = true;
-    form.style.display = "block";
-}
-
-document.getElementById("sure-btn").addEventListener("click", showCongrats);
-document.getElementById("notsure-btn").addEventListener("click", backToForm);
+    sureBtn.addEventListener("click", function() {
+        const datos = new FormData(form)
+        fetch(form.action, {
+            method: "POST",
+            body: datos
+        })
+        .then(response=> {
+            if (!response.ok) {
+                throw new Error("Error al guardar la actividad")
+            }
+            confirmBox.hidden = true
+            congratsBox.hidden = false
+        })
+        .catch(error=> {
+            console.error(error)
+        })
+    })
+})
