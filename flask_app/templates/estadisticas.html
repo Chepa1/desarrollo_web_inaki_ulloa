@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estadísticas</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Estadísticas{% endblock %}
+
+{% block body %}
     <h1>Estadísticas</h1>
     <h2>Cantidad de actividades por día:</h2>
-    <img src="../images/stats/chart1.jpg" alt="gráfico de barras sobre la cantidad de actividades por día">
+    <img src="{{ url_for('static', filename='images/stats/chart1.jpg') }}" alt="gráfico de barras sobre la cantidad de actividades por día">
+
     <h2>Total de actividades por tipo:</h2>
-    <img src="../images/stats/chart2.jpg" alt="gráfico de torta con el total de actividades por tipo">
+    <img src="{{ url_for('static', filename='images/stats/chart2.jpg') }}" alt="gráfico de torta con el total de actividades por tipo">
+
     <h2>Distribución de las actividades mensuales según momento del día:</h2>
-    <img src="../images/stats/chart3.jpg" alt="gráfico de barras de las actividades mensuales según momento del día"> <br>
-    <a href="../index.html">Volver al inicio</a>
-</body>
-</html>
+    <img src="{{ url_for('static', filename='images/stats/chart3.jpg') }}" alt="gráfico de barras de las actividades mensuales según momento del día">
+
+    <br>
+    <a href="{{ url_for('index') }}" class="btn-volver">Volver al inicio</a>
+{% endblock %}
