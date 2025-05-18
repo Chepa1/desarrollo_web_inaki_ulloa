@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 from math import ceil
 from sqlalchemy import func
+import utils.validations as val
 
 UPLOAD_FOLDER = "static/uploads"
 
@@ -26,6 +27,40 @@ def index():
 @app.route("/actividad/nueva", methods=["GET","POST"])
 def nueva_actividad():
     if request.method == "POST":
+        form = request.form
+        files = request.files
+
+        # validaciones
+        errores = {}
+        if not val.validate_region(form.get("select-region")):
+            errores["select-region"] = "Región inválida."
+        if not val.validate_comuna(form.get("select-comuna")):
+            errores["select-comuna"] = "Comuna inválida."
+        if not val.validate_nombre(form.get("nombre")):
+            errores["nombre"] = "Nombre obligatorio (≤200 caracteres)."
+        if not val.validate_email(form.get("email")):
+            errores["email"] = "Email inválido."
+        if not val.validate_phone(form.get("phone")):
+            errores["phone"] = "Teléfono inválido. Debe ser +569XXXXXXXX."
+        if not val.validate_tiempo_inicio(form.get("tiempo-inicio")):
+            errores["tiempo-inicio"] = "Fecha de inicio inválida."
+        if not val.validate_tiempo_termino(form.get("tiempo-inicio"), form.get("tiempo-termino")):
+            errores["tiempo-termino"] = "Fecha de término debe ser posterior al inicio."
+        if not val.validate_sector(form.get("sector")):
+            errores["sector"] = "Sector demasiado largo (máx. 100 caracteres)."
+        if not val.validate_descripcion(form.get("descripcion")):
+            errores["descripcion"] = "Descripción demasiado larga (máx. 1000 caracteres)."
+
+        fotos_errors = val.validate_fotos(files)
+        errores.update(fotos_errors)
+
+        if errores:
+            return render_template(
+                "agregar-actividad.html",
+                errores=errores,
+                data=form
+            ), 400
+
         data = {
             "comuna_id": request.form.get("select-comuna"),
             "sector": request.form.get("sector"),
