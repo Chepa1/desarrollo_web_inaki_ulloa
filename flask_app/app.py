@@ -147,5 +147,16 @@ def api_comunas():
     session.close()
     return jsonify([{"id": c.id, "nombre": c.nombre} for c in comunas])
 
+# tarea 3
+# estadisticas
+@app.route('/api/estadisticas/actividades-por-dia')
+def api_actividades_por_dia():
+    fechas, cantidades = db.get_actividades_por_dia()
+    return jsonify({
+        'fechas': fechas,
+        'cantidades': cantidades
+    })
+
+
 if __name__ == "__main__":
     app.run(debug=True)

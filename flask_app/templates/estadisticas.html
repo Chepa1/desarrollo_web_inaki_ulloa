@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Estadísticas{% endblock %}
 
+{% block head %}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+{% endblock %}
+
 {% block body %}
     <h1>Estadísticas</h1>
-    <h2>Cantidad de actividades por día:</h2>
-    <img src="{{ url_for('static', filename='images/stats/chart1.jpg') }}" alt="gráfico de barras sobre la cantidad de actividades por día">
+    
+    <div class="chart-container">
+        <h2>Cantidad de actividades por día:</h2>
+        <div id="chart1" class="chart-div">
+            <div class="loading">Cargando gráfico...</div>
+        </div>
+    </div>
 
-    <h2>Total de actividades por tipo:</h2>
-    <img src="{{ url_for('static', filename='images/stats/chart2.jpg') }}" alt="gráfico de torta con el total de actividades por tipo">
+    <div style="text-align: center;">
+        <a href="{{ url_for('index') }}" class="btn-volver">Volver al inicio</a>
+    </div>
+{% endblock %}
 
-    <h2>Distribución de las actividades mensuales según momento del día:</h2>
-    <img src="{{ url_for('static', filename='images/stats/chart3.jpg') }}" alt="gráfico de barras de las actividades mensuales según momento del día">
-
-    <br>
-    <a href="{{ url_for('index') }}" class="btn-volver">Volver al inicio</a>
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/estadisticas.js') }}" defer></script>
 {% endblock %}

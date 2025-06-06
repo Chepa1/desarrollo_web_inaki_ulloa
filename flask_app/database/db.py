@@ -1,5 +1,6 @@
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey, extract, func
 from sqlalchemy.orm import sessionmaker, declarative_base, relationship
+from datetime import datetime
 
 DB_NAME = "tarea2"
 DB_USERNAME = "cc5002"
@@ -16,6 +17,7 @@ class Region(Base):
     __tablename__ = "region"
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(200), nullable=False)
+
     comunas = relationship("Comuna", back_populates="region")
 
 class Comuna(Base):
@@ -23,6 +25,7 @@ class Comuna(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(200), nullable=False)
     region_id = Column(Integer, ForeignKey("region.id"), nullable=False)
+
     region = relationship("Region", back_populates="comunas")
     actividades = relationship("Actividad", back_populates="comuna")
 
@@ -37,6 +40,7 @@ class Actividad(Base):
     dia_hora_inicio = Column(DateTime, nullable=False)
     dia_hora_termino = Column(DateTime)
     descripcion = Column(String(500))
+
     comuna = relationship("Comuna", back_populates="actividades")
     fotos = relationship("Foto", back_populates="actividad", cascade="all, delete")
     contactos = relationship("ContactarPor", back_populates="actividad", cascade="all, delete")
@@ -48,6 +52,7 @@ class Foto(Base):
     ruta_archivo = Column(String(300), nullable=False)
     nombre_archivo = Column(String(300), nullable=False)
     actividad_id = Column(Integer, ForeignKey("actividad.id"), nullable=False)
+
     actividad = relationship("Actividad", back_populates="fotos")
 
 class ContactarPor(Base):
@@ -56,6 +61,7 @@ class ContactarPor(Base):
     nombre = Column(String(50), nullable=False)
     identificador = Column(String(150), nullable=False)
     actividad_id = Column(Integer, ForeignKey("actividad.id"), nullable=False)
+
     actividad = relationship("Actividad", back_populates="contactos")
 
 class ActividadTema(Base):
@@ -64,6 +70,7 @@ class ActividadTema(Base):
     tema = Column(String(50), nullable=False)
     glosa_otro = Column(String(15))
     actividad_id = Column(Integer, ForeignKey("actividad.id"), nullable=False)
+
     actividad = relationship("Actividad", back_populates="temas")
 
 # funciones
@@ -106,3 +113,23 @@ def add_foto(actividad_id, ruta_archivo, nombre_archivo):
     session.add(f)
     session.commit()
     session.close()
+
+#funciones para estadisticas
+def get_actividades_por_dia():
+    session = SessionLocal()
+    resultados = session.query(
+        func.date(Actividad.dia_hora_inicio).label('fecha'),
+        func.count(Actividad.id).label('cantidad')
+    ).group_by(
+        func.date(Actividad.dia_hora_inicio)
+    ).order_by('fecha').all()
+    
+    fechas = []
+    cantidades = []
+    
+    for fecha, cantidad in resultados:
+        fechas.append(fecha.strftime('%Y-%m-%d'))
+        cantidades.append(cantidad)
+    
+    session.close()
+    return fechas, cantidades
