@@ -157,6 +157,13 @@ def api_actividades_por_dia():
         'cantidades': cantidades
     })
 
+@app.route('/api/estadisticas/actividades-por-tipo')
+def api_actividades_por_tipo():
+    tipos, cantidades = db.get_actividades_por_tipo()
+    return jsonify({
+        'tipos': tipos,
+        'cantidades': cantidades
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)

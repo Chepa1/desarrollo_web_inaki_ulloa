@@ -133,3 +133,22 @@ def get_actividades_por_dia():
     
     session.close()
     return fechas, cantidades
+
+def get_actividades_por_tipo():
+    session = SessionLocal()
+    resultados = session.query(
+        ActividadTema.tema,
+        func.count(ActividadTema.id).label('cantidad')
+    ).group_by(
+        ActividadTema.tema
+    ).order_by('cantidad').all()
+    
+    tipos = []
+    cantidades = []
+    
+    for tema, cantidad in resultados:
+        tipos.append(tema.capitalize())
+        cantidades.append(cantidad)
+    
+    session.close()
+    return tipos, cantidades
