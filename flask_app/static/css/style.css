@@ -194,3 +194,25 @@ tr:hover {
 #val-msg {
     margin-top: 0;
 }
+
+/* Estilos para estadísticas */
+.chart-container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #d9e2c3;
+    border-radius: 8px;
+    background-color: #f0f4e8;
+}
+
+.chart-div {
+    height: 400px;
+    margin: 10px 0;
+}
+
+.loading {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 50px;
+}
