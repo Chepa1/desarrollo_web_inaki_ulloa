@@ -165,5 +165,15 @@ def api_actividades_por_tipo():
         'cantidades': cantidades
     })
 
+@app.route('/api/estadisticas/actividades-por-mes-momento')
+def api_actividades_por_mes_momento():
+    meses, manana, mediodia, tarde = db.get_actividades_por_mes_momento()
+    return jsonify({
+        'meses': meses,
+        'manana': manana,
+        'mediodia': mediodia,
+        'tarde': tarde
+    })
+
 if __name__ == "__main__":
     app.run(debug=True)

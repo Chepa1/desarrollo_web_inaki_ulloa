@@ -92,7 +92,68 @@ async function cargarGraficoActividadesPorTipo() {
     }
 }
 
+async function cargarGraficoActividadesPorMesMomento() {
+    try {
+        const response = await fetch("/api/estadisticas/actividades-por-mes-momento")
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        Highcharts.chart("chart3", {
+            chart: {
+                type: "column"
+            },
+            title: {
+                text: "Distribución de actividades mensuales según momento del día"
+            },
+            xAxis: {
+                categories: data.meses,
+                title: {
+                    text: "Meses"
+                }
+            },
+            yAxis: {
+                title: {
+                    text: "Cantidad de actividades"
+                },
+                min: 0,
+                allowDecimals: false
+            },
+            series: [
+                {
+                    name: "Mañana (06:00-11:59)",
+                    data: data.manana,
+                    color: "#ffc107"
+                },
+                {
+                    name: "Mediodía (12:00-17:59)",
+                    data: data.mediodia,
+                    color: "#28a745"
+                },
+                {
+                    name: "Tarde (18:00-23:59)",
+                    data: data.tarde,
+                    color: "#6f42c1"
+                }
+            ],
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            }
+        })
+    }
+    catch (error) {
+        console.error("Error al cargar gráfico de actividades por mes y momento:", error)
+        document.getElementById("chart3").innerHTML = '<div class="loading">Error al cargar el gráfico</div>'
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     cargarGraficoActividadesPorDia()
     cargarGraficoActividadesPorTipo()
+    cargarGraficoActividadesPorMesMomento()
 })

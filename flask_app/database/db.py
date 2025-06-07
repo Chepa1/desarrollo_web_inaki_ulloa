@@ -152,3 +152,26 @@ def get_actividades_por_tipo():
     
     session.close()
     return tipos, cantidades
+
+def get_actividades_por_mes_momento():
+    session = SessionLocal()
+    resultados = session.query(extract('month', Actividad.dia_hora_inicio).label('mes'), extract('hour', Actividad.dia_hora_inicio).label('hora'),
+        func.count(Actividad.id).label('cantidad')).group_by('mes', 'hora').all()
+    
+    meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+    manana = [0] * 12
+    mediodia = [0] * 12
+    tarde = [0] * 12
+    
+    for mes, hora, cantidad in resultados:
+        mes_idx = int(mes) - 1  # convertir a indice
+        
+        if 6 <= hora <= 11:  # mañana
+            manana[mes_idx] += cantidad
+        elif 12 <= hora <= 17:  # mediodia
+            mediodia[mes_idx] += cantidad
+        elif 18 <= hora <= 23:  # tarde
+            tarde[mes_idx] += cantidad
+    
+    session.close()
+    return meses, manana, mediodia, tarde
