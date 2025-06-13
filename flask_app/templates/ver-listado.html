@@ -47,7 +47,7 @@
     </section>
 
     {% for act in actividades %}
-    <div class="container" id="detalle-actividad-{{ loop.index }}" hidden>
+    <div class="container" id="detalle-actividad-{{ loop.index }}" data-actividad-id="{{ act.id }}" hidden>
         <h1>Información de la actividad</h1>
 
         <section class="info-section">
@@ -93,6 +93,24 @@
             </div>
         </section>
 
+        <section id="comentarios-section">
+            <h2>Comentarios</h2>
+            <ul id="comentarios-list"></ul>
+            <div id="comentario-error" hidden>
+                <h3>Errores al agregar comentario:</h3>
+                <ul id="comentario-error-list"></ul>
+            </div>
+            <form id="comentario-form">
+                <label for="comentario-nombre">Nombre</label>
+                <input type="text" id="comentario-nombre" name="nombre" minlength="3" maxlength="80" required><br>
+
+                <label for="comentario-texto">Comentario</label>
+                <textarea id="comentario-texto" name="texto" rows="4" cols="50" minlength="5" required></textarea><br>
+
+                <input type="button" id="comentario-submit" value="Agregar comentario">
+            </form>
+        </section>
+
         <div class="botones-navegacion center">
             <input type="button" value="Volver al Listado" class="btn-volver btn-volver-listado">
             <a href="{{ url_for('index') }}" class="btn-volver">Volver a la Portada</a>
@@ -110,4 +128,5 @@
 
 {% block scripts %}
     <script src="{{ url_for('static', filename='js/ver-listado.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/comentarios.js') }}" defer></script>
 {% endblock %}

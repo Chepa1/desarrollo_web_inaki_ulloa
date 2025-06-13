@@ -175,5 +175,33 @@ def api_actividades_por_mes_momento():
         'tarde': tarde
     })
 
+@app.route("/api/actividades/<int:actividad_id>/comentarios", methods=["GET"])
+def api_comentarios_by_actividad(actividad_id):
+    comentarios = db.get_comentarios_by_actividad(actividad_id)
+    return jsonify([{
+        "id": c.id,
+        "nombre": c.nombre,
+        "texto": c.texto,
+        "fecha": c.fecha.strftime("%Y-%m-%d %H:%M:%S")
+    } for c in comentarios])
+
+@app.route("/api/actividades/<int:actividad_id>/comentarios", methods=["POST"])
+def api_add_comentario(actividad_id):
+    data = request.get_json()
+    nombre = (data.get("nombre") or "").strip()
+    texto = (data.get("texto") or "").strip()
+    errores = {}
+
+    #validaciones
+    if not val.validate_nombre_comentario(nombre):
+        errores["nombre"] = "El nombre debe tener entre 3 y 80 letras."
+    if not val.validate_texto_comentario(texto):
+        errores["texto"] = "El comentario debe tener mínimo 5 letras."
+    if errores:
+        return jsonify({"errores": errores}), 400
+    
+    db.add_comentario(nombre, texto, actividad_id)
+    return jsonify({"mensaje": "Comentario agregado exitosamente."}), 201
+
 if __name__ == "__main__":
     app.run(debug=True)

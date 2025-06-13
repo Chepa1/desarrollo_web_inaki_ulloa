@@ -78,3 +78,14 @@ def validate_fotos(files):
             if not validate_foto(foto):
                 errors[key] = "Foto no válida."
     return errors
+
+def validate_nombre_comentario(nombre):
+    if not nombre or not (3 <= len(nombre) <= 80):
+        return False
+    return bool(re.match(r"^[A-Za-z0-9 ]+$", nombre))
+
+
+def validate_texto_comentario(texto):
+    if not texto or not (5 <= len(texto) <= 300):
+        return False
+    return True

@@ -1,5 +1,3 @@
-// static/js/ver-listado.js
-
 const mostrarDetalleActividad = id => {
     const listadoSection = document.getElementById("listado-section")
     listadoSection.hidden = true

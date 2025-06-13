@@ -45,6 +45,7 @@ class Actividad(Base):
     fotos = relationship("Foto", back_populates="actividad", cascade="all, delete")
     contactos = relationship("ContactarPor", back_populates="actividad", cascade="all, delete")
     temas = relationship("ActividadTema", back_populates="actividad", cascade="all, delete")
+    comentarios = relationship( "Comentario", back_populates="actividad", cascade="all, delete")
 
 class Foto(Base):
     __tablename__ = "foto"
@@ -72,6 +73,17 @@ class ActividadTema(Base):
     actividad_id = Column(Integer, ForeignKey("actividad.id"), nullable=False)
 
     actividad = relationship("Actividad", back_populates="temas")
+
+class Comentario(Base):
+    __tablename__ = "comentario"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(80), nullable=False)
+    texto = Column(String(300), nullable=False)
+    fecha = Column(DateTime, default=datetime.now, nullable=False)
+    actividad_id = Column(Integer, ForeignKey("actividad.id"), nullable=False)
+
+    actividad = relationship("Actividad", back_populates="comentarios")
+
 
 # funciones
 def list_actividades(limit=5):
@@ -175,3 +187,18 @@ def get_actividades_por_mes_momento():
     
     session.close()
     return meses, manana, mediodia, tarde
+
+#funciones para comentarios
+def get_comentarios_by_actividad(actividad_id):
+    session = SessionLocal()
+    comentarios = session.query(Comentario).filter(Comentario.actividad_id == actividad_id).order_by(Comentario.fecha.desc()).all()
+    session.close()
+    return comentarios
+
+def add_comentario(nombre, texto, actividad_id):
+    session = SessionLocal()
+    comentario = Comentario(nombre=nombre, texto=texto, actividad_id=actividad_id)
+    session.add(comentario)
+    session.commit()
+    session.refresh(comentario)
+    session.close()
