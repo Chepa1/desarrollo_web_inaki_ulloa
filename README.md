@@ -9,5 +9,5 @@ Consideraciones para la corrección:
 - Se utilizó chatgpt para la realización de tareas _mecánicas_ en las cuales la idea de implementación ya estaba presente, pero era tedioso de realizar. Más específicamente: reformatear el archivo de region-comuna.js a un diccionario similar al del auxiliar 3. Luego la implementación de las funciones fue hecha a mano, basándome en dicho auxiliar.
 
 
-- Los validadores marcan con muchos errores los html con jinja, por lo que hice una carpeta 'outputs' para guardar los html generados con la app corriendo. Ojala sean esos los que se corrijan.
-- En 'ver listado' de outputs marca error porque la imagen 'imagen-ampliada' tiene los atributos src y alt vacíos, pero estos se llenan al cargar la imagen.
+- Los validadores marcan con muchos errores los html con jinja, por lo que hice una carpeta 'outputs' para guardar los html generados con la app corriendo. Ojala sean esos los que se corrijan. (Se repite para la tarea 3)
+- En 'ver listado' de outputs marca error porque la imagen 'imagen-ampliada' tiene los atributos src y alt vacíos, pero estos se llenan al cargar la imagen. (Se repite para la tarea 3)

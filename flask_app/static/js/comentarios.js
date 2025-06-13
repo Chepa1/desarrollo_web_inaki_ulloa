@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function cargarComentarios(actividadId, detalle) {
-    var lista = detalle.querySelector('#comentarios-list');
+    var lista = detalle.querySelector('#comentarios-list-' + actividadId);
     lista.innerHTML = '';
     fetch('/api/actividades/' + actividadId + '/comentarios')
         .then(function(res) { return res.json(); })
@@ -36,12 +36,12 @@ function cargarComentarios(actividadId, detalle) {
             });
         });
 
-    var submitBtn = detalle.querySelector('#comentario-submit');
+    var submitBtn = detalle.querySelector('#comentario-submit-' + actividadId);
     submitBtn.onclick = function() {
-        var nombreInput = detalle.querySelector('#comentario-nombre');
-        var textoInput = detalle.querySelector('#comentario-texto');
-        var erroresDiv = detalle.querySelector('#comentario-error');
-        var erroresList = detalle.querySelector('#comentario-error-list');
+        var nombreInput = detalle.querySelector('#comentario-nombre-' + actividadId);
+        var textoInput = detalle.querySelector('#comentario-texto-' + actividadId);
+        var erroresDiv = detalle.querySelector('#comentario-error-' + actividadId);
+        var erroresList = detalle.querySelector('#comentario-error-list-' + actividadId);
         erroresList.innerHTML = '';
         var errores = {};
         if (nombreInput.value.trim().length < 3) {

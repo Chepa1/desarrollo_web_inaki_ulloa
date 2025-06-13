@@ -93,21 +93,21 @@
             </div>
         </section>
 
-        <section id="comentarios-section">
+        <section id="comentarios-section-{{ act.id }}">
             <h2>Comentarios</h2>
-            <ul id="comentarios-list"></ul>
-            <div id="comentario-error" hidden>
+            <ul id="comentarios-list-{{ act.id }}"></ul>
+            <div id="comentario-error-{{ act.id }}" hidden>
                 <h3>Errores al agregar comentario:</h3>
-                <ul id="comentario-error-list"></ul>
+                <ul id="comentario-error-list-{{ act.id }}"></ul>
             </div>
-            <form id="comentario-form">
-                <label for="comentario-nombre">Nombre</label>
-                <input type="text" id="comentario-nombre" name="nombre" minlength="3" maxlength="80" required><br>
+            <form id="comentario-form-{{ act.id }}">
+                <label for="comentario-nombre-{{ act.id }}">Nombre</label>
+                <input type="text" id="comentario-nombre-{{ act.id }}" name="nombre" minlength="3" maxlength="80" required><br>
 
-                <label for="comentario-texto">Comentario</label>
-                <textarea id="comentario-texto" name="texto" rows="4" cols="50" minlength="5" required></textarea><br>
+                <label for="comentario-texto-{{ act.id }}">Comentario</label>
+                <textarea id="comentario-texto-{{ act.id }}" name="texto" rows="4" cols="50" minlength="5" required></textarea><br>
 
-                <input type="button" id="comentario-submit" value="Agregar comentario">
+                <input type="button" id="comentario-submit-{{ act.id }}" value="Agregar comentario">
             </form>
         </section>
 
